@@ -13,10 +13,12 @@ struct Article: Codable, Identifiable {
     var id = UUID()
     let name: String
     let description: String
+    let type: String
     
     enum CodingKeys: String, CodingKey {
         case name
         case description
+        case type
     }
 }
 
@@ -49,6 +51,15 @@ struct ArticlePreview: View {
 struct PostsVC: View {
     @State private var selectedTab = 0
     @State private var articles: [Article] = []
+    @State private var selectedOption = "all"
+    
+    var filteredArticles: [Article] {
+        if selectedOption == "all" {
+            return articles
+        } else {
+            return articles.filter { $0.type == selectedOption }
+        }
+    }
     
     
     init() {
@@ -61,25 +72,39 @@ struct PostsVC: View {
     var body: some View { // layout
         
         NavigationView {
-            
-            ScrollView {
-                LazyVStack(spacing: 4) {
-                    ForEach(articles) { article in
-                                        ArticlePreview(article: article)
-                                    }
-                    .frame(maxWidth: .infinity)
+            VStack {
+                Picker(selection: $selectedOption, label: Text("Select Type")) {
+                    Text("Все").tag("all")
+                    Text("Обложки").tag("CoverPost")
+                    Text("Промо").tag("PromoPost")
+                    Text("Видео").tag("VideoPost")
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-                .background(Constants.Colors.backgroundMain)
+                .pickerStyle(SegmentedPickerStyle())
+                .padding()
+                
+                
+                ScrollView {
+                    LazyVStack(spacing: 4) {
+                        ForEach(filteredArticles) { article in
+                            ArticlePreview(article: article)
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 16)
+                    .background(Constants.Colors.backgroundMain)
+                    .onAppear { // fetch all post
+                        fetchData()
+                    }
+                }
+                .navigationBarTitle("Articles")
+                //            .foregroundColor(.red)
             }
-            .navigationBarTitle("Articles")
-//            .foregroundColor(.red)
-            
+            .background(Constants.Colors.modalGreyColor)
+        
+        
         }
-        .onAppear { // fetch all post
-            fetchData()
-        }
+        
     }
     
     func fetchData() {
@@ -108,6 +133,7 @@ struct PostsVC: View {
                     let decodedData = try JSONDecoder().decode([Article].self, from: data)
                     DispatchQueue.main.async {
                         self.articles = decodedData
+                        print(self.articles)
                     }
                 } catch {
                     print("Error decoding JSON: \(error)")
