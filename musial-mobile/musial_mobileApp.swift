@@ -11,7 +11,8 @@ import SwiftUI
 struct musial_mobileApp: App {
     var body: some Scene {
         WindowGroup {
-            RootView()
+            StartS()
+//            RootView()
         }
     }
 }

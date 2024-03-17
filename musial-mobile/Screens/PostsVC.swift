@@ -13,11 +13,20 @@ struct Article: Codable, Identifiable {
     var id = UUID()
     let name: String
     let description: String
+    let type: String
+    let post_image: URL
     
     enum CodingKeys: String, CodingKey {
         case name
         case description
+        case type
+        case post_image
     }
+}
+
+struct ResponseData: Codable {
+    let jti: String
+    let posts: [Article]
 }
 
 struct ArticlePreview: View {
@@ -25,6 +34,19 @@ struct ArticlePreview: View {
     
     var body: some View {
         VStack(alignment: .leading) {
+            
+            AsyncImage(url: article.post_image) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(height: 200) // Set desired height for the image
+                    .clipped() // Clip to prevent image overflow
+            } placeholder: {
+                // Placeholder while image is loading
+                Color.gray
+                    .frame(height: 200) // Set desired height for the placeholder
+            }
+            
             Text("\(article.name)")
                 .font(.headline)
                 .foregroundColor(.primary)
@@ -49,6 +71,15 @@ struct ArticlePreview: View {
 struct PostsVC: View {
     @State private var selectedTab = 0
     @State private var articles: [Article] = []
+    @State private var selectedOption = "all"
+    
+    var filteredArticles: [Article] {
+        if selectedOption == "all" {
+            return articles
+        } else {
+            return articles.filter { $0.type == selectedOption }
+        }
+    }
     
     
     init() {
@@ -61,25 +92,41 @@ struct PostsVC: View {
     var body: some View { // layout
         
         NavigationView {
-            
-            ScrollView {
-                LazyVStack(spacing: 4) {
-                    ForEach(articles) { article in
-                                        ArticlePreview(article: article)
-                                    }
-                    .frame(maxWidth: .infinity)
+            VStack {
+                
+                
+                Picker(selection: $selectedOption, label: Text("Select Type")) {
+                    Text("Все").tag("all")
+                    Text("Обложки").tag("CoverPost")
+                    Text("Промо").tag("PromoPost")
+                    Text("Видео").tag("VideoPost")
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-                .background(Constants.Colors.backgroundMain)
+                .pickerStyle(SegmentedPickerStyle())
+                .padding()
+                
+                
+                ScrollView {
+                    LazyVStack(spacing: 4) {
+                        ForEach(filteredArticles) { article in
+                            ArticlePreview(article: article)
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 16)
+                    .background(Constants.Colors.backgroundMain)
+                    .onAppear { // fetch all post
+                        fetchData()
+                    }
+                }
+                .navigationBarTitle("Articles")
+                //            .foregroundColor(.red)
             }
-            .navigationBarTitle("Articles")
-//            .foregroundColor(.red)
-            
+            .background(Constants.Colors.modalGreyColor)
+        
+        
         }
-        .onAppear { // fetch all post
-            fetchData()
-        }
+        
     }
     
     func fetchData() {
@@ -105,9 +152,10 @@ struct PostsVC: View {
                 }
                 
                 do {
-                    let decodedData = try JSONDecoder().decode([Article].self, from: data)
+                    let decodedData = try JSONDecoder().decode(ResponseData.self, from: data)
                     DispatchQueue.main.async {
-                        self.articles = decodedData
+                        self.articles = decodedData.posts
+                        print(self.articles)
                     }
                 } catch {
                     print("Error decoding JSON: \(error)")
