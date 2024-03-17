@@ -9,16 +9,25 @@ import Foundation
 import SwiftUI
 
 
+struct Article: Codable, Identifiable {
+    var id = UUID()
+    let name: String
+    let description: String
+}
+
 struct ArticlePreview: View {
+    var article: Article
+    
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Article Title")
-                .font(.headline)
-                .foregroundColor(.primary)
-            Text("Article Description")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-        }
+                    Text("Title: \(article.name)")
+                        .font(.headline)
+                        .foregroundColor(.primary)
+                    
+                    Text("Description: \(article.description)")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
         .frame(maxWidth: .infinity)
         .padding()
         .background(Color.white)
@@ -29,33 +38,52 @@ struct ArticlePreview: View {
 struct PostsVC: View {
     @State private var selectedTab = 0
     
+    
     init() {
-        // Customize the appearance of the navigation bar
+        // customize the appearance of the navigation bar
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .blue // Change this to your desired background color
+        appearance.backgroundColor = .blue
         UINavigationBar.appearance().standardAppearance = appearance
     }
     
-    var body: some View {
+    var body: some View { // layout
+        
+        var posts: [[String: Any]] = getPostsByType(postType: "all")
         NavigationView {
             
             ScrollView {
                 LazyVStack(spacing: 4) {
-                    ForEach(0..<10) { _ in
-                        ArticlePreview()
-                            .frame(maxWidth: .infinity)
-                            .padding(.horizontal, 16)
-                    }
+                    ForEach(posts) { article in
+                                        ArticlePreview(article: article)
+                                    }
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
                 .background(Constants.Colors.backgroundMain)
             }
             .navigationBarTitle("Articles")
-            .foregroundColor(.red)
+//            .foregroundColor(.red)
             
         }
+        .onAppear { // fetch all post
+            HTTPReceiver().fetchDataFromServer()
+        }
     }
+    
+    func getPostsByType(postType: String) -> [[String: Any]] {
+        
+        var allPosts: [[String: Any]] = HTTPReceiver().getPosts()
+        var postsToReturn: [[String: Any]] = []
+        
+        for post in allPosts {
+            postsToReturn.append(post)
+        }
+        
+        
+        
+        return postsToReturn
+    }
+    
 }
 
 #Preview {

@@ -14,6 +14,7 @@
 		8363D0DB2B8266930023507A /* PostsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8363D0DA2B8266930023507A /* PostsVC.swift */; };
 		8363D0DE2B8266CD0023507A /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8363D0DD2B8266CD0023507A /* TabBar.swift */; };
 		8363D0E02B826A5A0023507A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8363D0DF2B826A5A0023507A /* Constants.swift */; };
+		83B5688C2BA72236003500A9 /* HTTPReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B5688B2BA72236003500A9 /* HTTPReceiver.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		8363D0DA2B8266930023507A /* PostsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsVC.swift; sourceTree = "<group>"; };
 		8363D0DD2B8266CD0023507A /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		8363D0DF2B826A5A0023507A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		83B5688B2BA72236003500A9 /* HTTPReceiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPReceiver.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 		8363D0CA2B8266650023507A /* musial-mobile */ = {
 			isa = PBXGroup;
 			children = (
+				83B5688A2BA71DC8003500A9 /* Utilities */,
 				8363D0DC2B8266C10023507A /* Components */,
 				8363D0D92B8266860023507A /* Screens */,
 				8363D0CB2B8266650023507A /* musial_mobileApp.swift */,
@@ -90,6 +93,14 @@
 				8363D0DF2B826A5A0023507A /* Constants.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		83B5688A2BA71DC8003500A9 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				83B5688B2BA72236003500A9 /* HTTPReceiver.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83B5688C2BA72236003500A9 /* HTTPReceiver.swift in Sources */,
 				8363D0CC2B8266650023507A /* musial_mobileApp.swift in Sources */,
 				8363D0DB2B8266930023507A /* PostsVC.swift in Sources */,
 				8363D0DE2B8266CD0023507A /* TabBar.swift in Sources */,
