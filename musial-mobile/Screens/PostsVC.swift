@@ -13,6 +13,11 @@ struct Article: Codable, Identifiable {
     var id = UUID()
     let name: String
     let description: String
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case description
+    }
 }
 
 struct ArticlePreview: View {
@@ -20,23 +25,30 @@ struct ArticlePreview: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-                    Text("Title: \(article.name)")
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                    
-                    Text("Description: \(article.description)")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-        .frame(maxWidth: .infinity)
+            Text("\(article.name)")
+                .font(.headline)
+                .foregroundColor(.primary)
+                .lineLimit(1) // Limit to a single line
+                .truncationMode(.tail) // Truncate with three dots in the middle if text doesn't fit
+                                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            Text("\(article.description)")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                .lineLimit(1) // Limit to a single line
+                                .truncationMode(.tail) // Truncate with three dots in the middle if text doesn't fit
+                                .frame(maxWidth: .infinity, alignment: .leading)
+        }
         .padding()
         .background(Color.white)
         .cornerRadius(10)
+        .shadow(radius: 5)
     }
 }
 
 struct PostsVC: View {
     @State private var selectedTab = 0
+    @State private var articles: [Article] = []
     
     
     init() {
@@ -48,14 +60,14 @@ struct PostsVC: View {
     
     var body: some View { // layout
         
-        var posts: [[String: Any]] = getPostsByType(postType: "all")
         NavigationView {
             
             ScrollView {
                 LazyVStack(spacing: 4) {
-                    ForEach(posts) { article in
+                    ForEach(articles) { article in
                                         ArticlePreview(article: article)
                                     }
+                    .frame(maxWidth: .infinity)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
@@ -66,23 +78,42 @@ struct PostsVC: View {
             
         }
         .onAppear { // fetch all post
-            HTTPReceiver().fetchDataFromServer()
+            fetchData()
         }
     }
     
-    func getPostsByType(postType: String) -> [[String: Any]] {
-        
-        var allPosts: [[String: Any]] = HTTPReceiver().getPosts()
-        var postsToReturn: [[String: Any]] = []
-        
-        for post in allPosts {
-            postsToReturn.append(post)
+    func fetchData() {
+            guard let url = URL(string: "http://localhost:3000/api/v1/posts.json") else {
+                print("Invalid URL")
+                return
+            }
+            
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let error = error {
+                    print("Error fetching data: \(error)")
+                    return
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    print("Invalid response")
+                    return
+                }
+                
+                guard let data = data else {
+                    print("No data received")
+                    return
+                }
+                
+                do {
+                    let decodedData = try JSONDecoder().decode([Article].self, from: data)
+                    DispatchQueue.main.async {
+                        self.articles = decodedData
+                    }
+                } catch {
+                    print("Error decoding JSON: \(error)")
+                }
+            }.resume()
         }
-        
-        
-        
-        return postsToReturn
-    }
     
 }
 
