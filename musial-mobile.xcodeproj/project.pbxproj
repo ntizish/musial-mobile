@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8303D4152BB7D12400BD2FDB /* UserProfileCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8303D4142BB7D12400BD2FDB /* UserProfileCV.swift */; };
+		8303D4172BB7D13D00BD2FDB /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8303D4162BB7D13D00BD2FDB /* UserModel.swift */; };
+		8303D4192BB7D1B400BD2FDB /* ChangeableAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8303D4182BB7D1B400BD2FDB /* ChangeableAvatarView.swift */; };
+		8303D41B2BB7D1C900BD2FDB /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8303D41A2BB7D1C900BD2FDB /* ProfileImage.swift */; };
+		8303D41D2BB7D23A00BD2FDB /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8303D41C2BB7D23A00BD2FDB /* PrimaryButton.swift */; };
 		833F62962B948F8000D495CF /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833F62952B948F8000D495CF /* RootView.swift */; };
 		8363D0CC2B8266650023507A /* musial_mobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8363D0CB2B8266650023507A /* musial_mobileApp.swift */; };
 		8363D0D02B8266670023507A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8363D0CF2B8266670023507A /* Assets.xcassets */; };
@@ -36,6 +41,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8303D4142BB7D12400BD2FDB /* UserProfileCV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileCV.swift; sourceTree = "<group>"; };
+		8303D4162BB7D13D00BD2FDB /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		8303D4182BB7D1B400BD2FDB /* ChangeableAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeableAvatarView.swift; sourceTree = "<group>"; };
+		8303D41A2BB7D1C900BD2FDB /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
+		8303D41C2BB7D23A00BD2FDB /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		833F62952B948F8000D495CF /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		8363D0C82B8266650023507A /* musial-mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "musial-mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8363D0CB2B8266650023507A /* musial_mobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = musial_mobileApp.swift; sourceTree = "<group>"; };
@@ -131,6 +141,7 @@
 				8396D9B32BB5F3F900309EA9 /* SignupS.swift */,
 				8396D9B62BB5F3F900309EA9 /* StartS.swift */,
 				833F62952B948F8000D495CF /* RootView.swift */,
+				8303D4142BB7D12400BD2FDB /* UserProfileCV.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -141,6 +152,9 @@
 				8363D0DD2B8266CD0023507A /* TabBar.swift */,
 				8363D0DF2B826A5A0023507A /* Constants.swift */,
 				8396D9C62BB5F4FC00309EA9 /* PasswordTextField.swift */,
+				8303D4182BB7D1B400BD2FDB /* ChangeableAvatarView.swift */,
+				8303D41A2BB7D1C900BD2FDB /* ProfileImage.swift */,
+				8303D41C2BB7D23A00BD2FDB /* PrimaryButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -175,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				8396D9C22BB5F4CB00309EA9 /* RegLogResponse.swift */,
+				8303D4162BB7D13D00BD2FDB /* UserModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -267,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8303D4152BB7D12400BD2FDB /* UserProfileCV.swift in Sources */,
 				83B5688C2BA72236003500A9 /* HTTPReceiver.swift in Sources */,
 				8396D9CA2BB5F52400309EA9 /* NavigationState.swift in Sources */,
 				8363D0CC2B8266650023507A /* musial_mobileApp.swift in Sources */,
@@ -275,6 +291,7 @@
 				8396D9BB2BB5F3F900309EA9 /* SigninS.swift in Sources */,
 				8396D9B02BB5F3A400309EA9 /* Password.swift in Sources */,
 				8363D0DB2B8266930023507A /* PostsVC.swift in Sources */,
+				8303D41B2BB7D1C900BD2FDB /* ProfileImage.swift in Sources */,
 				8396D9A02BB5F2E300309EA9 /* AuthViewModel.swift in Sources */,
 				8396D9BE2BB5F3F900309EA9 /* DropS.swift in Sources */,
 				8396D9C72BB5F4FC00309EA9 /* PasswordTextField.swift in Sources */,
@@ -284,10 +301,13 @@
 				8396D9C32BB5F4CB00309EA9 /* RegLogResponse.swift in Sources */,
 				8396D9A32BB5F31500309EA9 /* ErrorState.swift in Sources */,
 				8396D9BC2BB5F3F900309EA9 /* SignupS.swift in Sources */,
+				8303D4172BB7D13D00BD2FDB /* UserModel.swift in Sources */,
 				8396D9A62BB5F32B00309EA9 /* ErrorView.swift in Sources */,
 				8396D9B92BB5F3F900309EA9 /* AuthS.swift in Sources */,
 				8396D9A92BB5F35500309EA9 /* HTTPMethod.swift in Sources */,
+				8303D41D2BB7D23A00BD2FDB /* PrimaryButton.swift in Sources */,
 				8396D9BA2BB5F3F900309EA9 /* StartS.swift in Sources */,
+				8303D4192BB7D1B400BD2FDB /* ChangeableAvatarView.swift in Sources */,
 				8396D9C02BB5F3F900309EA9 /* MainAuthS.swift in Sources */,
 				833F62962B948F8000D495CF /* RootView.swift in Sources */,
 				8396D9BD2BB5F3F900309EA9 /* ResetS.swift in Sources */,

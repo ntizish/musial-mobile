@@ -40,18 +40,18 @@ struct MainAuthS: View {
                 //            }
 
                 
-                // Reset password button
-                NavigationLink(destination: ResetS(errorState: $errorState)) {
-                    Text("Reset password")
-                }
-                .font(.system(size: 25, weight: .bold))
-                .frame(width: 200, height: 30).padding()
-                .background(Color.black)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .overlay {
-                    RoundedRectangle(cornerRadius: 10).stroke(Color.white, lineWidth: 5)
-                }
+//                // Reset password button
+//                NavigationLink(destination: ResetS(errorState: $errorState)) {
+//                    Text("Reset password")
+//                }
+//                .font(.system(size: 25, weight: .bold))
+//                .frame(width: 200, height: 30).padding()
+//                .background(Color.black)
+//                .foregroundColor(.white)
+//                .cornerRadius(10)
+//                .overlay {
+//                    RoundedRectangle(cornerRadius: 10).stroke(Color.white, lineWidth: 5)
+//                }
                 
                 
                 // Sign up button
@@ -68,18 +68,18 @@ struct MainAuthS: View {
                 }
                 
                 
-                // Delete user account button
-                NavigationLink(destination: DropS(errorState: $errorState)) {
-                    Text("Delete account")
-                }
-                .font(.system(size: 25, weight: .bold))
-                .frame(width: 200, height: 30).padding()
-                .background(Color.black)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .overlay {
-                    RoundedRectangle(cornerRadius: 10).stroke(Color.white, lineWidth: 5)
-                }
+//                // Delete user account button
+//                NavigationLink(destination: DropS(errorState: $errorState)) {
+//                    Text("Delete account")
+//                }
+//                .font(.system(size: 25, weight: .bold))
+//                .frame(width: 200, height: 30).padding()
+//                .background(Color.black)
+//                .foregroundColor(.white)
+//                .cornerRadius(10)
+//                .overlay {
+//                    RoundedRectangle(cornerRadius: 10).stroke(Color.white, lineWidth: 5)
+//                }
                 
             }.navigationTitle("Auth")
         }

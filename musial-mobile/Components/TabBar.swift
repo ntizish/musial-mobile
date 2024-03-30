@@ -46,7 +46,7 @@ struct TabBar: View {
                 .tag(1)
                 
                 
-                Text("Tab 3")
+                Text("Tab 4")
                     .tabItem {
                         Image(systemName: "plus")
                         Text("Создать")
@@ -60,7 +60,7 @@ struct TabBar: View {
                     }
                     .tag(3)
                 
-                Text("Tab 5")
+                UserProfileCV()
                     .tabItem {
                         Image(systemName: "person.crop.circle")
                         Text("Профиль")
