@@ -16,6 +16,8 @@ struct SigninS: View {
     
     @Environment(\.dismiss) var dismiss
     
+    
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -119,6 +121,6 @@ extension View {
                 }
             }
         }
-        .navigationViewStyle(.stack)
+//        .navigationViewStyle(.stack)
     }
 }
